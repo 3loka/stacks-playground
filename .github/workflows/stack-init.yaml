@@ -11,6 +11,11 @@ on:
         required: true
         description: 'AWS Secret access Key temporarily used to create trust tokens'
 
+# permission can be added at job level or workflow level    
+permissions:
+      id-token: write
+      contents: write    # This is required for actions/checkout@v1
+      
 jobs:
   AWS-Deploy-OIDC:
     runs-on: ubuntu-latest
@@ -78,14 +83,14 @@ jobs:
           then
             grep -R "vstoken.actions.githubusercontent.com" providers.txt>matchedproviders.txt
             head -1 matchedproviders.txt | grep "vstoken.actions.githubusercontent.com" | sed 's/"Arn": "//g' | sed 's/providers.txt.*arn/arn/g' | sed 's/"//g' > oidcarn.txt
-            audience='actions-playground'
+            audience=https://github.com/${{ github.repository }}
             oidcarn=`cat oidcarn.txt`
             oidcarnvalue2=`echo $oidcarn`
             aws iam add-client-id-to-open-id-connect-provider --client-id $audience --open-id-connect-provider-arn $oidcarnvalue2
             echo "exists"
           else
             value=`cat tp.txt`
-            aws iam create-open-id-connect-provider --url https://vstoken.actions.githubusercontent.com --thumbprint-list $value --client-id-list https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+            aws iam create-open-id-connect-provider --url https://vstoken.actions.githubusercontent.com --thumbprint-list $value --client-id-list https://github.com/${{ github.repository }}
             grep -R "vstoken.actions.githubusercontent.com" providers.txt>con.txt
             head -1 con.txt | grep "vstoken.actions.githubusercontent.com" | sed 's/"Arn": "//g' | sed 's/providers.txt.*arn/arn/g' | sed 's/"//g'  > oidcarn.txt
           fi  
