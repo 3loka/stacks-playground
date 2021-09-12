@@ -1,14 +1,15 @@
-name: GitHub Actions Demo OIDC
+name: "GitHub Actions Demo OIDC"
+
 on:
   workflow_dispatch:
-      inputs:
-        AWS_KEY_ID:
-          required: true
-          description: 'AWS Key ID temporarily used to create trust tokens'
+    inputs:
+      AWS_KEY_ID:
+        required: true
+        description: 'AWS Key ID temporarily used to create trust tokens'
 
-        AWS_SECRET_ACCESS_KEY:
-          required: true
-          description: 'AWS Secret access Key temporarily used to create trust tokens'
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+        description: 'AWS Secret access Key temporarily used to create trust tokens'
 
 jobs:
   AWS-Deploy-OIDC:
