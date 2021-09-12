@@ -121,6 +121,7 @@ jobs:
           rm matchedproviders.txt
           rm certfile.crt
           rm tp.txt
+          rm trust-policy.json
             
         
       ################### Steps mentioned in this block would later be moved to the cloud’s login action ####################### 
@@ -161,13 +162,13 @@ jobs:
 
       - name: Creating a bucket in s3
         env:
-          USE_BUCKET: ${{ secrets.USE_EXISTING_BUCKET }}
+          USE_BUCKET: ${{ secrets.OVERRIDE_EXISTING_BUCKET }}
         if: "env.USE_BUCKET == 'false'"
         run : aws s3 mb s3://${{ secrets.AWS_S3_BUCKET_NAME }} 
 
       - name: Updaing bucket policy
         env:
-          USE_BUCKET: ${{ secrets.USE_EXISTING_BUCKET }}
+          USE_BUCKET: ${{ secrets.OVERRIDE_EXISTING_BUCKET }}
         if: "env.USE_BUCKET == 'false'"
         run: aws s3api put-bucket-policy --bucket ${{ secrets.AWS_S3_BUCKET_NAME }} --policy '{"Statement":[{"Effect":"Allow","Principal":"*","Action":"s3:GetObject","Resource":"arn:aws:s3:::${{ secrets.AWS_S3_BUCKET_NAME }}/*"}]}'
         
@@ -194,4 +195,4 @@ jobs:
         with:
           name: 'AWS_S3_ROLE_ARN'
           value: ${{ env.ROLE_ARN }}
-          token: ${{ secrets.AWS_S3_ROLE_ARN }}
+          token:token: ${{ secrets.GITHUB_PAT }}

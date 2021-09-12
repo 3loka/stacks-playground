@@ -32,7 +32,12 @@ inputs:
     is_secret: true
     required: true
 
-  - name: USE_EXISTING_BUCKET
+  - name: GITHUB_PAT
+      description: GitHub PAT with repo secrets permissions. Stack needs this to write the Role ARN secret for OIDC communications
+      required: true
+      is_secret: true
+
+  - name: OVERRIDE_EXISTING_BUCKET
     description: Is this an existing S3 Bucket (Type true or false, Default value is false)?
     default: 'false'
     is_secret: true
@@ -49,8 +54,11 @@ configs:
             value: {{inputs.AWS_REGION}}
           - name: AWS_ROLE_NAME
             value: {{inputs.AWS_ROLE_NAME}}
-          - name: USE_EXISTING_BUCKET
-            value: {{inputs.USE_EXISTING_BUCKET}}
+          - name: OVERRIDE_EXISTING_BUCKET
+            value: {{inputs.OVERRIDE_EXISTING_BUCKET}}
+          - name: GITHUB_PAT
+            value: {{inputs.GITHUB_PAT}}
+
         topics:
         - nextjs
         - aws
