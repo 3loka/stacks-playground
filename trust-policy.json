@@ -4,13 +4,13 @@
     {
       "Effect": "Allow",
       "Principal": {
-        "Federated": "ROLEARN"
+        "Federated": "OIDCPROVIDER"
       },
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "vstoken.actions.githubusercontent.com:aud": "AUDIENCE",
-          "vstoken.actions.githubusercontent.com:sub": "repo:$$ORG_REPO$$:ref:refs/heads/$$BRANCH$$"
+          "vstoken.actions.githubusercontent.com:aud": "AUDREPO",
+          "vstoken.actions.githubusercontent.com:sub": "repo:AUDIENCE:ref:refs/heads/main"
         }
       }
     }
