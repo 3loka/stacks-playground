@@ -15,7 +15,7 @@ on:
 permissions:
       id-token: write
       contents: write    # This is required for actions/checkout@v1
-      
+
 jobs:
   AWS-Deploy-OIDC:
     runs-on: ubuntu-latest
@@ -113,11 +113,14 @@ jobs:
           echo "`jq '.Role.Arn' rolearnop.json `" > rolearn.txt
           content=`cat ./rolearn.txt`
           echo "ROLE_ARN=$content" >> $GITHUB_ENV
-          # rm temptrust.json
-          # rm oidcarn.txt
-          # rm rolearn.txt
-          # rm rolearnop.json
-          # rm providers.txt
+          rm temptrust.json
+          rm oidcarn.txt
+          rm rolearn.txt
+          rm rolearnop.json
+          rm providers.txt
+          rm matchedproviders.txt
+          rm certfile.crt
+          rm tp.txt
             
         
       ################### Steps mentioned in this block would later be moved to the cloud’s login action ####################### 
