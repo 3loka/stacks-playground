@@ -49,6 +49,8 @@ configs:
             value: {{inputs.AWS_S3_BUCKET_NAME}}
           - name: AWS_REGION
             value: {{inputs.AWS_REGION}}
+          - name: AWS_ROLE_NAME
+            value: {{inputs.AWS_ROLE_NAME}}
         topics:
         - nextjs
         - aws

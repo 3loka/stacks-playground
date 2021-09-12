@@ -101,10 +101,10 @@ jobs:
           # cat ./trust-policy.json | sed 's@OIDCPROVIDER@'"$oidcarnvalue"'@'  | sed 's@AUDIENCE@'"$au"'@'  | sed 's@AUDREPO@'"$aurepo"'@'  > temptrust.json
           cat ./temptrust.json
           # TODO Handle condition where role already exists
-          aws iam create-role --role-name ${{ secrets.AWS_ROLE }} --assume-role-policy-document file://temptrust.json &
+          aws iam create-role --role-name ${{ secrets.AWS_ROLE_NAME }} --assume-role-policy-document file://temptrust.json &
           wait
-          aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --role-name ${{ secrets.AWS_ROLE }}
-          aws iam get-role --role-name ${{ secrets.AWS_ROLE }} > rolearnop.json
+          aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --role-name ${{ secrets.AWS_ROLE_NAME }}
+          aws iam get-role --role-name ${{ secrets.AWS_ROLE_NAME }} > rolearnop.json
           echo "`jq '.Role.Arn' rolearnop.json `" > rolearn.txt
           content=`cat ./rolearn.txt`
           echo "ROLE_ARN=$content" >> $GITHUB_ENV
