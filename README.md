@@ -10,7 +10,7 @@
 
 
 ## Why should you use this stack?
-You can spin a website in seconds using NextJS.
+You can spin a website in seconds using NextJS. This stack uses the OIDC flow which means you dont have to store the AWS credentials as Github Secrets. The necessary setup will be done by the Stack itself by creating roles and Setting up trust relationship. The stack will ask for AWS Credentials but that is not stored anywhere and is used only for Setup purposes.
 
 Next.js gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching and more. No config needed. Read more about [next.js](https://nextjs.org/learn)
 
@@ -26,6 +26,7 @@ The stack also sets up a proper Github CI/CD environment by taing care of the fo
 - AWS S3 Key
 - AWS S3 Secret Access Key
 - Use Existing Bucket?
+- AWS Role Name
 ```
 
 #### Github apps installed with this stack

@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "ROLEARN"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "vstoken.actions.githubusercontent.com:aud": "AUDIENCE",
+          "vstoken.actions.githubusercontent.com:sub": "repo:$$ORG_REPO$$:ref:refs/heads/$$BRANCH$$"
+        }
+      }
+    }
+  ]
+}

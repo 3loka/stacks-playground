@@ -27,6 +27,11 @@ inputs:
     is_secret: true
     required: true
 
+  - name: AWS_ROLE_NAME
+    description: Provide a Unique name for your AWS Role. We will create it for you and setup trust between Github and AWS
+    is_secret: true
+    required: true
+
   - name: USE_EXISTING_BUCKET
     description: Is this an existing S3 Bucket (Type true or false, Default value is false)?
     default: 'false'
