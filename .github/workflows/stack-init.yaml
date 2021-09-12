@@ -181,8 +181,9 @@ jobs:
           git commit -m "Added URL to Readme."
           git push 
 
-      uses: hmanzur/actions-set-secret@v2.0.0
-      with:
-        name: 'AWS_S3_ROLE_ARN'
-        value: ${{ env.ROLE_ARN }}
-        token: ${{ secrets.AWS_S3_ROLE_ARN }}
+      - name: Persist OIDC enabled ROLE ARN
+        uses: hmanzur/actions-set-secret@v2.0.0
+        with:
+          name: 'AWS_S3_ROLE_ARN'
+          value: ${{ env.ROLE_ARN }}
+          token: ${{ secrets.AWS_S3_ROLE_ARN }}
