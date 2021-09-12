@@ -32,7 +32,7 @@ inputs:
     is_secret: true
     required: true
 
-  - name: GITHUB_PAT
+  - name: REPO_ACCESS_TOKEN
     description: GitHub PAT with repo secrets permissions. Stack needs this to write the Role ARN secret for OIDC communications
     required: true
     is_secret: true
@@ -56,8 +56,8 @@ configs:
             value: {{inputs.AWS_ROLE_NAME}}
           - name: OVERRIDE_EXISTING_BUCKET
             value: {{inputs.OVERRIDE_EXISTING_BUCKET}}
-          - name: GITHUB_PAT
-            value: {{inputs.GITHUB_PAT}}
+          - name: REPO_ACCESS_TOKEN
+            value: {{inputs.REPO_ACCESS_TOKEN}}
 
         topics:
         - nextjs
