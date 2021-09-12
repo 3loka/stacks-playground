@@ -195,4 +195,4 @@ jobs:
         with:
           name: 'AWS_S3_ROLE_ARN'
           value: ${{ env.ROLE_ARN }}
-          token:token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
