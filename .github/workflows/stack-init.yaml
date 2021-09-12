@@ -152,10 +152,10 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Creating a bucket in s3
-          env:
-            USE_BUCKET: ${{ secrets.USE_EXISTING_BUCKET }}
-          if: "env.USE_BUCKET == 'false'"
-          run : aws s3 mb s3://${{ secrets.AWS_S3_BUCKET_NAME }} 
+        env:
+          USE_BUCKET: ${{ secrets.USE_EXISTING_BUCKET }}
+        if: "env.USE_BUCKET == 'false'"
+        run : aws s3 mb s3://${{ secrets.AWS_S3_BUCKET_NAME }} 
 
       - name: Updaing bucket policy
         env:
