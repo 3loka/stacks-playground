@@ -35,7 +35,7 @@ inputs:
     required: true
 
   - name: REPO_ACCESS_TOKEN
-    description: GitHub PAT with repo secrets permissions. Stack needs this to write the Role ARN secret for OIDC communications
+    description: GitHub PAT with repo secrets permissions. Stack needs this to write the Role ARN secret for OIDC communications. Refer this <a href="https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token">documentation</a> on how to create your token
     required: true
     is_secret: true
 
