@@ -2,6 +2,11 @@ name: "deploy"
 on:
   push:
     branches: [ main ]
+    
+# permission can be added at job level or workflow level    
+permissions:
+      id-token: write
+      contents: write    # This is required for actions/checkout@v1
 
 jobs:
   deploy: 
@@ -10,8 +15,8 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-          with:
-            persist-credentials: false
+        with:
+          persist-credentials: false
       
       - name: use node.js v14
         uses: actions/setup-node@v1
@@ -40,8 +45,10 @@ jobs:
       # Get credentials. Change --role-arn value to your role arn
 
       - name: Get temp credentials using id token. 
+        env:
+            AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
-          CREDENTIALS=$(aws sts assume-role-with-web-identity  --role-arn ${{ env.ROLE_ARN }} --role-session-name 'samplerolesession' --web-identity-token ${{ steps.idtoken.outputs.id_token }} --query Credentials)
+          CREDENTIALS=$(aws sts assume-role-with-web-identity  --role-arn ${{ secrets.AWS_S3_ROLE_ARN }} --role-session-name 'samplerolesession' --web-identity-token ${{ steps.idtoken.outputs.id_token }} --query Credentials)
           AID=$(echo $CREDENTIALS | jq -rc '.AccessKeyId')
           AKEY=$(echo $CREDENTIALS | jq -rc '.SecretAccessKey')
           STOKEN=$(echo $CREDENTIALS | jq -rc '.SessionToken')
@@ -62,7 +69,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
            
       - name: Uploading files to s3
-        run: aws s3 sync ./next s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ 
+        run: aws s3 sync ./out s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ 
 
       - name: setting index and error files
         run: aws s3 website s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ --index-document index.html --error-document 404.html

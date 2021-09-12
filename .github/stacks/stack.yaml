@@ -11,10 +11,12 @@ inputs:
 
   - name: AWS_KEY_ID
     description: This will be used only once, we will discard it once we generate a OIDC token exchange
+    is_secret: true
     required: true
     
   - name: AWS_SECRET_ACCESS_KEY
     description: This will be used only once, we will discard it once we generate a OIDC token exchange
+    is_secret: true
     required: true
 
   - name: AWS_REGION
