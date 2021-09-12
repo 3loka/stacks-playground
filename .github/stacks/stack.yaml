@@ -33,9 +33,9 @@ inputs:
     required: true
 
   - name: GITHUB_PAT
-      description: GitHub PAT with repo secrets permissions. Stack needs this to write the Role ARN secret for OIDC communications
-      required: true
-      is_secret: true
+    description: GitHub PAT with repo secrets permissions. Stack needs this to write the Role ARN secret for OIDC communications
+    required: true
+    is_secret: true
 
   - name: OVERRIDE_EXISTING_BUCKET
     description: Is this an existing S3 Bucket (Type true or false, Default value is false)?
